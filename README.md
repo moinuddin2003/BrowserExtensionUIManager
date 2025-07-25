@@ -36,11 +36,10 @@ Users should be able to:
 ![](./assets/images/Dark%20Mode%20375px%202.png)
 ![](./assets/images/LightMode%20375px.png)
 ![](./assets/images/LightMode%20375px%202.png)
-![](./assets/images/Dark%20Mpode%20375px%201.png)
 ### Links
 
-- Solution URL: [](https://github.com/moinuddin2003/BrowserExtensionUIManager)
-- Live Site URL: [](https://moinuddin2003.github.io/BrowserExtensionUIManager/)
+- Solution URL: [Github Repo](https://github.com/moinuddin2003/BrowserExtensionUIManager)
+- Live Site URL: [Live Demo](https://moinuddin2003.github.io/BrowserExtensionUIManager/)
 
 ## My process
 
