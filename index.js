@@ -5,6 +5,8 @@ async function getExtensions() {
   return data;
 }
 
+document.body.classList.add("dark-mode"); // default
+
 function renderExtensions(data, container) {
   container.innerHTML = ""; // Clear old content
 
@@ -46,6 +48,7 @@ function renderExtensions(data, container) {
       console.log(`${extension.name} removed`);
     });
 
+
     // Add card to container
     container.appendChild(card);
   });
@@ -56,21 +59,65 @@ function setupFilters(extensions, container) {
   const allBtn = document.getElementById("all");
   const activeBtn = document.getElementById("active");
   const inactiveBtn = document.getElementById("inActive");
+  const filterBtn = document.getElementsByClassName("filter-btn");
 
+
+  function updateSeclectedBtn(clickedBtn) {
+    Array.from(filterBtn).forEach(btn => {
+      btn.classList.remove("selected");
+        clickedBtn.classList.add("selected");
+    });
+  }
   allBtn.addEventListener("click", () => {
     renderExtensions(extensions, container);
+    updateSeclectedBtn(allBtn)
   });
 
   activeBtn.addEventListener("click", () => {
     const activeOnly = extensions.filter(ext => ext.isActive);
     renderExtensions(activeOnly, container);
+    updateSeclectedBtn(activeBtn)
+
   });
 
   inactiveBtn.addEventListener("click", () => {
     const inactiveOnly = extensions.filter(ext => !ext.isActive);
     renderExtensions(inactiveOnly, container);
+    updateSeclectedBtn(inactiveBtn)
   });
+
+
 }
+
+
+
+const toggleThemeBtn = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+
+toggleThemeBtn.addEventListener("click" , () =>
+{
+  const isDark = document.body.classList.contains("dark-mode");
+
+  if(isDark)
+  {
+    document.body.classList.remove("dark-mode");
+    document.body.classList.add("light-mode");
+    themeIcon.src = "assets/images/icon-moon.svg";
+    themeIcon.alt = "Switch to Dark Mode"
+    console.log("Light Mode is now On")
+    
+    
+  }
+  else
+    {
+      document.body.classList.remove("light-mode");
+      document.body.classList.add("dark-mode");
+      themeIcon.src = "assets/images/icon-sun.svg";
+    themeIcon.alt = "Switch to Light Mode"
+    console.log("Dark Mode is now On")
+
+  }
+})
 
 // 4. Main initializer function
 async function init() {

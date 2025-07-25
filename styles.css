@@ -4,13 +4,22 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
+body.dark-mode{
     font-family: 'Noto Sans', sans-serif;
     background:linear-gradient(180deg, #040918 0%, #091540 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     color: rgb(233, 236, 238);
+}
+
+body.light-mode{
+    font-family: 'Noto Sans', sans-serif;
+    background:linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: hsl(227, 75%, 14%)
 }
 
 @font-face {
@@ -24,8 +33,7 @@ body{
     margin: 0 auto;
     width: 80%;
 } 
-.navbar
-{
+.navbar {
     background: hsl(226, 25%, 17%);
     border-radius: 15px;
     width: 100%;
@@ -37,13 +45,31 @@ body{
     margin: 2rem 0rem ;
     font-weight: 700;
 }
+
+body.light-mode .navbar
+{
+      background: hsl(200, 60%, 99%);  
+}
 .sun
 {
     margin-left: auto;
     cursor: pointer;
     background: hsl(225, 23%, 24%);
-    border-radius: 10px;
+    border-radius: 15px;
+    border: none;
     padding: 0.8rem;
+}
+body.light-mode .sun
+{
+    background: hsl(0, 0%, 93%)
+}
+.sun:hover
+{
+    background: hsl(226, 11%, 37%)
+}
+.sun:focus
+{
+    border:2px solid hsl(3, 71%, 56%);
 }
 .extensionTitle
 {
@@ -60,7 +86,7 @@ body{
 
 /* Extension Card Styling */
 
-.extensions {
+.extensionsBtn {
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -69,7 +95,7 @@ gap: 1rem;
 }
 
 
-.filter-buttons button {
+.filter-btn  {
   border: none;
   background: hsl(225, 23%, 24%);
   color: white;
@@ -78,9 +104,24 @@ gap: 1rem;
   cursor: pointer;
 }
 
-/* .filter-buttons #all{
+body.light-mode .filter-btn
+{
+  background: hsl(200, 60%, 99%); 
+  color:hsl(227, 75%, 14%);
+}
+.filter-btn.selected {
   background-color: hsl(3, 71%, 56%);
-} */
+}
+
+body.light-mode .filter-btn.selected
+{
+ background: hsl(3, 71%, 56%); 
+  color:hsl(0, 0%, 93%);
+}
+.filter-btn:focus{
+border:2px solid hsl(3, 71%, 56%);
+}
+
 
 #extensions {
   display: grid;
@@ -101,6 +142,12 @@ gap: 1rem;
   color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
+
+body.light-mode .card
+{
+  background: hsl(200, 60%, 99%); 
+  color:hsl(227, 75%, 14%) 
+}
 .card-header {
   display: flex;
   gap: 1rem;
@@ -117,6 +164,11 @@ gap: 1rem;
   font-size: 0.9rem;
   color: #ccc;
 }
+
+body.light-mode .card-header p
+{
+  color: hsl(226, 11%, 37%)
+}
 .card-footer {
   margin-top: 1rem;
   display: flex;
@@ -125,13 +177,44 @@ gap: 1rem;
 }
 .remove-btn {
   background: hsl(226, 25%, 17%);
-  border: 1 px solid white;
+  border: 1px solid white;
   padding: 0.4rem 1rem;
   color: white;
-  /* border-radius: 1rem; */
+  border-radius: 1rem;
   cursor: pointer;
 }
 
+body.light-mode .remove-btn
+{
+  background: hsl(200, 60%, 99%); 
+  color:hsl(227, 75%, 14%);
+  border:2px solid  hsl(0, 0%, 93%);
+}
+.remove-btn:hover
+{
+  background-color: hsl(3, 86%, 64%);
+  border: none ;
+}
+
+body.light-mode .remove-btn:hover
+{
+  background: hsl(3, 71%, 56%); 
+  color:hsl(0, 0%, 93%);
+  border:2px solid  hsl(0, 0%, 93%);
+}
+
+.remove-btn:focus
+{
+  border: 2px solid hsl(3, 71%, 56%);
+  background-color: hsl(226, 25%, 17%);
+}
+
+body.light-mode .remove-btn:focus
+{
+  border:2px solid  hsl(3, 71%, 56%); 
+  color:hsl(227, 75%, 14%);
+  background-color: hsl(0, 0%, 93%);
+}
 
 .switch {
   position: relative;
@@ -144,7 +227,7 @@ gap: 1rem;
   width: 0;
   height: 0;
 }
-.slider {
+.slider { 
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -154,6 +237,10 @@ gap: 1rem;
   background-color:hsl(226, 11%, 37%);
   border-radius: 20px;
   transition: 0.4s;
+}
+body.light-mode .slider
+{
+  background-color: hsl(0, 0%, 93%)
 }
 .slider:before {
   position: absolute;
@@ -174,14 +261,14 @@ input:checked + .slider:before {
 }
 /* Tablet screens (≤ 992px) */
 @media (max-width: 992px) {
-  .extensions-grid {
+  #extensions {
     grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
   }
 }
 
 /* Mobile screens (≤ 600px) */
 @media (max-width: 600px) {
-  .extensions-grid {
+  #extensions {
     grid-template-columns: 1fr; /* 1 card per row */
   }
 
@@ -207,11 +294,18 @@ input:checked + .slider:before {
     font-size: 1rem;
   }
 
-  .extensionList
+  .extensionsBtn
   {
     display: flex;
     flex-direction:column
   }
 }
-
+.attribution {
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+.attribution a {
+  color: hsl(3, 86%, 64%);
+}
 
